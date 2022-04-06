@@ -26,7 +26,7 @@ class FileAdapter(persist.Adapter):
     def __init__(self, file_path):
         self._file_path = file_path
 
-    def load_policy(self, model):
+    async def load_policy(self, model):
         if not os.path.isfile(self._file_path):
             raise RuntimeError("invalid file path, file path cannot be empty")
 
@@ -65,14 +65,14 @@ class FileAdapter(persist.Adapter):
 
             file.writelines(lines)
 
-    def add_policy(self, sec, ptype, rule):
+    async def add_policy(self, sec, ptype, rule):
         pass
 
-    def add_policies(self, sec, ptype, rules):
+    async def add_policies(self, sec, ptype, rules):
         pass
 
-    def remove_policy(self, sec, ptype, rule):
+    async def remove_policy(self, sec, ptype, rule):
         pass
 
-    def remove_policies(self, sec, ptype, rules):
+    async def remove_policies(self, sec, ptype, rules):
         pass
