@@ -239,7 +239,7 @@ class ManagementEnforcer(InternalEnforcer):
 
         If the rule already exists, the function returns false for the corresponding policy rule and the rule will not be added.
         Otherwise the function returns true for the corresponding policy rule by adding the new rule."""
-        rules_added = self._add_policies("g", ptype, rules)
+        rules_added = await self._add_policies("g", ptype, rules)
         if self.auto_build_role_links:
             self.model.build_incremental_role_links(
                 self.rm_map[ptype], PolicyOp.Policy_add, "g", ptype, rules
