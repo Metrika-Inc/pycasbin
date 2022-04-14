@@ -298,7 +298,7 @@ class ManagementEnforcer(InternalEnforcer):
 
         if self.auto_build_role_links:
             self.model.build_incremental_role_links(
-                self.rm_map[ptype], PolicyOp.Policy_remove, "g", ptype, *field_values
+                self.rm_map[ptype], PolicyOp.Policy_remove, "g", ptype, field_values
             )
         return rule_removed
 
