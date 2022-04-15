@@ -230,8 +230,7 @@ class CoreEnforcer:
 
     async def load_filtered_policy(self, filter):
         """reloads a filtered policy from file/database."""
-        # Metrika fix: We want all the policies in memomry plus the reloaded
-        #self.model.clear_policy()
+        self.model.clear_policy()
 
         if not hasattr(self.adapter, "is_filtered"):
             raise ValueError("filtered policies are not supported by this adapter")
@@ -241,6 +240,23 @@ class CoreEnforcer:
         self.model.sort_policies_by_priority()
 
         self.init_rm_map()
+        self.model.print_policy()
+        if self.auto_build_role_links:
+            self.build_role_links()
+    
+    async def load_filtered_grouping_policy(self, filter):
+        """reloads a group filtered policy from file/database."""
+        # Metrika added method
+        
+        field_values = [value for key, value in filter.__dict__.items() if key != "ptype"]
+        
+        self.model.remove_filtered_policy(self, "g", "g", 1, *field_values):
+
+        if not hasattr(self.adapter, "is_filtered"):
+            raise ValueError("filtered policies are not supported by this adapter")
+
+        await self.adapter.load_filtered_policy(self.model, filter)
+      
         self.model.print_policy()
         if self.auto_build_role_links:
             self.build_role_links()
