@@ -248,9 +248,14 @@ class CoreEnforcer:
         """reloads a group filtered policy from file/database."""
         # Metrika added method
         
-        field_values = [value for key, value in filter.__dict__.items() if key != "ptype"]
+        filter_values = []
+        for key, value in filter.__dict__.items():
+            if key != "ptype":
+                if isinstance(value, list):
+                    for item in value:
+                        filter_values.append(item)
         
-        self.model.remove_filtered_policy("g", "g", 0, *field_values)
+        self.model.remove_filtered_policy("g", "g", 0, *filter_values)
 
         if not hasattr(self.adapter, "is_filtered"):
             raise ValueError("filtered policies are not supported by this adapter")
