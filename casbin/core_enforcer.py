@@ -250,7 +250,7 @@ class CoreEnforcer:
         
         field_values = [value for key, value in filter.__dict__.items() if key != "ptype"]
         
-        self.model.remove_filtered_policy(self, "g", "g", 1, *field_values):
+        self.model.remove_filtered_policy(self, "g", "g", 1, *field_values)
 
         if not hasattr(self.adapter, "is_filtered"):
             raise ValueError("filtered policies are not supported by this adapter")
