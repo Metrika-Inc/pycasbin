@@ -230,7 +230,8 @@ class CoreEnforcer:
 
     async def load_filtered_policy(self, filter):
         """reloads a filtered policy from file/database."""
-        self.model.clear_policy()
+        # Metrika fix: We want all the policies in memomry plus the reloaded
+        #self.model.clear_policy()
 
         if not hasattr(self.adapter, "is_filtered"):
             raise ValueError("filtered policies are not supported by this adapter")
